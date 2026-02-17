@@ -1,19 +1,19 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site } from '../data/site';
+import { site, reviews } from '../data/site';
 
 const service = {
   name: "Concrete Driveways",
-  title: "Concrete Driveway Contractors Port Orange FL",
-  description: "Expert concrete driveway installation, repair, and resurfacing in Port Orange. New driveways from $8-$18/sqft. Call (386) 220-8770 for a free estimate.",
-  hero: "Professional Concrete Driveway Services",
-  intro: "A quality concrete driveway adds value to your home while providing a durable, low-maintenance surface for decades. Our experienced team delivers expert driveway installation, extensions, and repairs throughout Port Orange and Volusia County."
+  title: "Concrete Driveway Contractors Port Orange FL | New Driveways from $8/sqft",
+  description: "Expert concrete driveway installation, replacement, and repair in Port Orange & Volusia County. 4000 PSI concrete, proper reinforcement, 25+ year lifespan. Call (386) 220-8770 for your FREE estimate!",
+  priceRange: "$8-$18/sq ft"
 };
 
 const schema = {
   "@context": "https://schema.org",
   "@type": "Service",
   "name": service.name,
+  "description": service.description,
   "provider": {
     "@type": "LocalBusiness",
     "name": site.name,
@@ -27,27 +27,45 @@ const schema = {
     }
   },
   "areaServed": site.serviceAreas.map(a => ({ "@type": "City", "name": a })),
-  "description": service.description
+  "offers": {
+    "@type": "Offer",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "price": "8",
+      "priceCurrency": "USD",
+      "unitText": "per square foot"
+    }
+  }
 };
 
 const faqs = [
   {
     q: "How much does a concrete driveway cost in Port Orange?",
-    a: "Concrete driveway costs in Port Orange range from $8-$18 per square foot. A standard 400 sq ft single-car driveway costs $3,200-$7,200. A two-car 600 sq ft driveway runs $4,800-$10,800. Stamped or decorative concrete adds 40-60% to the cost."
+    a: "Concrete driveway costs in Port Orange typically range from $8-$18 per square foot, depending on size, prep work needed, and finish options. A standard 400 sq ft single-car driveway costs $3,200-$7,200. A two-car 600 sq ft driveway runs $4,800-$10,800. Stamped or colored concrete adds 40-60% to the base price. We provide free on-site estimates with exact pricing for your specific project."
   },
   {
-    q: "How thick should a concrete driveway be?",
-    a: "Residential driveways should be 4 inches thick minimum for cars and light trucks. For heavy vehicles like RVs or trailers, we recommend 5-6 inches. The apron where it meets the street should be 6 inches thick."
+    q: "How thick should a residential concrete driveway be?",
+    a: "For standard passenger vehicles, we recommend a minimum thickness of 4 inches. However, for driveways that will support heavier vehicles like RVs, boats, or work trucks, we install 5-6 inch thick concrete. The apron section where your driveway meets the street should always be 6 inches thick to handle the additional stress from turning vehicles."
   },
   {
-    q: "How long does a concrete driveway last?",
-    a: "A properly installed concrete driveway lasts 25-30 years with minimal maintenance. Florida's warm climate is actually ideal for concrete longevity since we don't have freeze-thaw cycles that damage driveways up north."
+    q: "How long does a concrete driveway last in Florida?",
+    a: "A properly installed concrete driveway in Florida lasts 25-30 years or more with basic maintenance. Florida's warm climate is actually ideal for concrete longevity since we don't experience freeze-thaw cycles that damage driveways in northern states. The main threats here are UV exposure and tree root damage, both of which can be mitigated with proper installation and occasional sealing."
   },
   {
-    q: "How long until I can drive on a new driveway?",
-    a: "Wait 7 days before driving passenger vehicles on new concrete. Heavy trucks and RVs should wait 28 days for full cure. You can walk on it after 24-48 hours."
+    q: "How long until I can drive on my new concrete driveway?",
+    a: "We recommend waiting at least 7 days before driving passenger vehicles on new concrete. Heavy trucks, RVs, and trailers should wait a full 28 days for the concrete to reach its maximum strength. You can walk on the surface after 24-48 hours, but avoid heavy foot traffic for the first few days."
+  },
+  {
+    q: "Do I need a permit for a new driveway in Port Orange?",
+    a: "In Port Orange and most Volusia County municipalities, you typically need a permit for new driveway construction or major driveway replacements. The permit ensures the driveway meets local codes for drainage, setbacks, and connection to the right-of-way. We handle the permit process for all our projects, so you don't have to worry about the paperwork."
+  },
+  {
+    q: "What's the best time of year to pour a concrete driveway in Florida?",
+    a: "In Central Florida, fall through spring (October-April) is generally the best time for concrete work. The moderate temperatures allow for optimal curing without the extreme heat of summer or the risk of rain from afternoon thunderstorms. However, we successfully pour driveways year-round by adjusting our techniques and scheduling around weather patterns."
   }
 ];
+
+const drivewayReviews = reviews.filter(r => r.service === "Driveway" || r.service === "Sidewalk").slice(0, 3);
 ---
 
 <BaseLayout 
@@ -56,89 +74,317 @@ const faqs = [
   canonical="/concrete-driveway-contractors/"
   schema={schema}
 >
-  <!-- Hero -->
-  <section class="bg-gradient-to-br from-secondary-dark to-secondary py-20 text-white text-center">
-    <div class="max-w-4xl mx-auto px-4">
-      <h1 class="text-4xl md:text-5xl font-bold mb-6">{service.hero}</h1>
-      <p class="text-xl text-gray-300 mb-8">{service.intro}</p>
-      <a href={site.phoneLink} class="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark px-8 py-4 rounded-lg font-bold text-lg transition">
-        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-        Call {site.phone}
-      </a>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-secondary-dark via-secondary to-secondary-light py-20 text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.4\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto px-4 relative z-10">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 bg-primary/20 border border-primary/30 px-4 py-2 rounded-full text-primary text-sm font-semibold mb-6">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          Port Orange's Trusted Driveway Contractors
+        </div>
+        
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
+          Professional Concrete <span class="text-primary">Driveway Installation</span>
+        </h1>
+        
+        <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+          Transform your home's curb appeal with a beautiful, durable concrete driveway built to last. Serving Port Orange, Daytona Beach, and all of Volusia County with quality craftsmanship since 2003.
+        </p>
+        
+        <div class="flex flex-wrap gap-4 mb-8">
+          <div class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20">
+            <span class="text-2xl font-bold text-primary">{service.priceRange}</span>
+            <span class="text-gray-300 text-sm ml-2">per sq ft</span>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20">
+            <span class="text-2xl font-bold text-trust">25+</span>
+            <span class="text-gray-300 text-sm ml-2">Year Lifespan</span>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20">
+            <span class="text-2xl font-bold text-accent">★ 5.0</span>
+            <span class="text-gray-300 text-sm ml-2">Rating</span>
+          </div>
+        </div>
+        
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href={site.phoneLink} class="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-primary to-primary-dark text-white px-8 py-4 rounded-xl text-lg font-bold shadow-xl shadow-primary/30 hover:shadow-primary/50 transition">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            Call {site.phone}
+          </a>
+          <a href="/contact/" class="inline-flex items-center justify-center gap-2 border-2 border-white/50 text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-white hover:text-secondary transition">
+            Get Free Quote
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Content -->
-  <section class="py-16">
-    <div class="max-w-4xl mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-6">Concrete Driveway Services in Port Orange</h2>
-      <p class="text-gray-600 mb-6">Whether you need a brand new driveway, want to extend your existing one, or need repairs, our team has the experience and equipment to get the job done right. We use high-quality 4,000 PSI concrete with proper reinforcement for driveways that last.</p>
-      
-      <h3 class="text-2xl font-semibold mt-10 mb-4">Our Driveway Services Include:</h3>
-      <ul class="space-y-3 mb-10">
-        <li class="flex items-start gap-3">
-          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-          <span><strong>New Driveway Installation</strong> – Complete tear-out and pour with proper grading and base preparation</span>
-        </li>
-        <li class="flex items-start gap-3">
-          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-          <span><strong>Driveway Extensions</strong> – Add parking space with seamless matching concrete</span>
-        </li>
-        <li class="flex items-start gap-3">
-          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-          <span><strong>Driveway Resurfacing</strong> – Overlay worn concrete with a fresh, new surface</span>
-        </li>
-        <li class="flex items-start gap-3">
-          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-          <span><strong>Decorative Options</strong> – Stamped patterns, exposed aggregate, and colored concrete</span>
-        </li>
-        <li class="flex items-start gap-3">
-          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-          <span><strong>Crack Repair</strong> – Fix cracks before they spread and damage your driveway</span>
-        </li>
-      </ul>
-
-      <h3 class="text-2xl font-semibold mt-10 mb-4">Why Choose Us for Your Driveway?</h3>
-      <div class="grid md:grid-cols-2 gap-6 mb-10">
-        <div class="bg-gray-50 p-6 rounded-xl">
-          <h4 class="font-semibold mb-2">Proper Base Preparation</h4>
-          <p class="text-gray-600 text-sm">We don't cut corners. Every driveway gets proper excavation, compacted gravel base, and forms for long-lasting results.</p>
+  <!-- Trust Bar -->
+  <section class="bg-gray-50 py-6 border-b">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex flex-wrap justify-center items-center gap-6 md:gap-12 text-sm">
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-trust" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+          <span class="font-medium">Licensed & Insured</span>
         </div>
-        <div class="bg-gray-50 p-6 rounded-xl">
-          <h4 class="font-semibold mb-2">Quality Materials</h4>
-          <p class="text-gray-600 text-sm">We use 4,000 PSI concrete with fiber mesh or rebar reinforcement on all driveways.</p>
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span class="font-medium">Free On-Site Estimates</span>
         </div>
-        <div class="bg-gray-50 p-6 rounded-xl">
-          <h4 class="font-semibold mb-2">Experienced Crew</h4>
-          <p class="text-gray-600 text-sm">Our team has poured hundreds of driveways. We know how to handle Florida's sandy soil and weather conditions.</p>
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+          <span class="font-medium">20+ Years Experience</span>
         </div>
-        <div class="bg-gray-50 p-6 rounded-xl">
-          <h4 class="font-semibold mb-2">Transparent Pricing</h4>
-          <p class="text-gray-600 text-sm">No hidden fees or surprise charges. You get a detailed written quote before we start.</p>
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm-2 14l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+          <span class="font-medium">Written Warranties</span>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- FAQs -->
-      <h3 class="text-2xl font-semibold mt-10 mb-6">Frequently Asked Questions</h3>
-      <div class="space-y-4">
-        {faqs.map(faq => (
-          <div class="border rounded-lg p-5">
-            <h4 class="font-semibold mb-2">{faq.q}</h4>
-            <p class="text-gray-600 text-sm">{faq.a}</p>
+  <!-- Main Content -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid lg:grid-cols-3 gap-12">
+        <!-- Main Content Column -->
+        <div class="lg:col-span-2">
+          <h2 class="text-3xl font-bold mb-6">Concrete Driveway Services in Port Orange & Volusia County</h2>
+          
+          <div class="prose prose-lg max-w-none text-gray-600">
+            <p>Your driveway is one of the first things people notice about your home. A cracked, stained, or deteriorating driveway can detract from your property's appearance and even affect its value. At Port Orange Concrete Co., we specialize in creating beautiful, functional concrete driveways that enhance your home's curb appeal while providing decades of reliable service.</p>
+            
+            <p>Whether you need a brand new driveway installation, want to extend your existing driveway for additional parking, or need to repair and resurface worn concrete, our experienced team has the skills and equipment to deliver exceptional results. We've been serving homeowners throughout Volusia County for over 20 years, and our reputation for quality work and honest service has made us the area's most trusted concrete contractor.</p>
+            
+            <h3 class="text-2xl font-bold text-secondary-dark mt-10 mb-4">Our Driveway Services Include:</h3>
+            
+            <div class="grid md:grid-cols-2 gap-6 not-prose my-8">
+              <div class="bg-gray-50 p-6 rounded-xl border border-gray-100">
+                <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+                  <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M19 12h-2v3h-3v2h5v-5zM7 9h3V7H5v5h2V9zm14-6H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16.01H3V4.99h18v14.02z"/></svg>
+                </div>
+                <h4 class="font-bold text-lg mb-2">New Driveway Installation</h4>
+                <p class="text-gray-600 text-sm">Complete removal of existing surface, proper grading, compacted base, forms, and professional pour with finishing.</p>
+              </div>
+              
+              <div class="bg-gray-50 p-6 rounded-xl border border-gray-100">
+                <div class="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center mb-4">
+                  <svg class="w-6 h-6 text-accent" fill="currentColor" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                </div>
+                <h4 class="font-bold text-lg mb-2">Driveway Extensions</h4>
+                <p class="text-gray-600 text-sm">Add parking space for additional vehicles, boats, or RVs with seamless concrete that matches your existing driveway.</p>
+              </div>
+              
+              <div class="bg-gray-50 p-6 rounded-xl border border-gray-100">
+                <div class="w-12 h-12 bg-trust/10 rounded-xl flex items-center justify-center mb-4">
+                  <svg class="w-6 h-6 text-trust" fill="currentColor" viewBox="0 0 24 24"><path d="M17.66 7.93L12 2.27 6.34 7.93c-3.12 3.12-3.12 8.19 0 11.31C7.9 20.8 9.95 21.58 12 21.58c2.05 0 4.1-.78 5.66-2.34 3.12-3.12 3.12-8.19 0-11.31zM12 19.59c-1.6 0-3.11-.62-4.24-1.76C6.62 16.69 6 15.19 6 13.59s.62-3.11 1.76-4.24L12 5.1v14.49z"/></svg>
+                </div>
+                <h4 class="font-bold text-lg mb-2">Driveway Resurfacing</h4>
+                <p class="text-gray-600 text-sm">Restore worn driveways with a new overlay that covers imperfections and provides a fresh, clean surface.</p>
+              </div>
+              
+              <div class="bg-gray-50 p-6 rounded-xl border border-gray-100">
+                <div class="w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center mb-4">
+                  <svg class="w-6 h-6 text-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
+                </div>
+                <h4 class="font-bold text-lg mb-2">Crack Repair & Patching</h4>
+                <p class="text-gray-600 text-sm">Fix cracks and damaged sections before they spread. Proper repair extends your driveway's lifespan significantly.</p>
+              </div>
+            </div>
+            
+            <h3 class="text-2xl font-bold text-secondary-dark mt-10 mb-4">Why Concrete is the Best Choice for Florida Driveways</h3>
+            
+            <p>When it comes to driveway materials in Florida, concrete offers unmatched advantages over alternatives like asphalt or pavers. Here's why homeowners throughout Volusia County consistently choose concrete:</p>
+            
+            <ul class="list-disc pl-6 space-y-3 my-6">
+              <li><strong>Durability in Florida Heat:</strong> Unlike asphalt that softens in intense summer heat, concrete maintains its structural integrity even on the hottest days. You won't have to worry about tire marks, indentations, or surface deterioration from UV exposure.</li>
+              <li><strong>Lower Lifetime Cost:</strong> While the initial cost may be slightly higher than asphalt, concrete requires less maintenance and lasts nearly twice as long. Over a 30-year period, concrete is significantly more economical.</li>
+              <li><strong>Minimal Maintenance:</strong> Concrete driveways need only occasional cleaning and sealing every 3-5 years. Asphalt requires regular sealing every 1-3 years to prevent deterioration.</li>
+              <li><strong>Design Flexibility:</strong> With stamped patterns, colored concrete, and exposed aggregate options, you can achieve virtually any look – from natural stone to brick to modern minimalist designs.</li>
+              <li><strong>Increased Property Value:</strong> A well-maintained concrete driveway adds curb appeal and value to your home, making it an investment that pays dividends if you ever decide to sell.</li>
+            </ul>
+            
+            <h3 class="text-2xl font-bold text-secondary-dark mt-10 mb-4">Our Driveway Installation Process</h3>
+            
+            <p>Quality concrete work starts long before the truck arrives. Here's what makes our driveway installations stand out:</p>
+            
+            <div class="bg-primary/5 p-6 rounded-xl my-8 not-prose">
+              <h4 class="font-bold text-lg mb-4 text-secondary-dark">Step 1: Site Preparation</h4>
+              <p class="text-gray-600 mb-4">We excavate to the proper depth (typically 8-10 inches), grade for proper drainage away from your home, and install a compacted gravel base. This foundation work is crucial for preventing settling and cracking.</p>
+              
+              <h4 class="font-bold text-lg mb-4 text-secondary-dark">Step 2: Forms & Reinforcement</h4>
+              <p class="text-gray-600 mb-4">Wooden or metal forms are installed to create clean edges and maintain proper thickness. We add fiber mesh, wire mesh, or rebar reinforcement depending on your driveway's requirements.</p>
+              
+              <h4 class="font-bold text-lg mb-4 text-secondary-dark">Step 3: Concrete Placement</h4>
+              <p class="text-gray-600 mb-4">We use high-quality 4,000 PSI concrete delivered by truck. The pour is carefully managed to ensure consistent coverage and proper consolidation to eliminate air pockets.</p>
+              
+              <h4 class="font-bold text-lg mb-4 text-secondary-dark">Step 4: Finishing</h4>
+              <p class="text-gray-600 mb-4">Our experienced finishers smooth the surface, add control joints to manage cracking, apply any decorative treatments, and create the texture you've chosen – from smooth to broom-finish to stamped patterns.</p>
+              
+              <h4 class="font-bold text-lg mb-4 text-secondary-dark">Step 5: Curing & Cleanup</h4>
+              <p class="text-gray-600">Proper curing is essential for maximum strength. We apply curing compound or cover the concrete to retain moisture. Forms are removed after 24-48 hours, and we thoroughly clean the work area.</p>
+            </div>
+            
+            <h3 class="text-2xl font-bold text-secondary-dark mt-10 mb-4">Decorative Driveway Options</h3>
+            
+            <p>A concrete driveway doesn't have to be plain gray. We offer several decorative options to complement your home's architecture and landscaping:</p>
+            
+            <ul class="list-disc pl-6 space-y-3 my-6">
+              <li><strong>Stamped Concrete:</strong> Patterns that replicate brick, slate, flagstone, cobblestone, and more. Popular for creating a high-end look at a fraction of the cost of natural materials.</li>
+              <li><strong>Colored Concrete:</strong> Integral color mixed throughout or surface-applied stains in earth tones, grays, terracotta, and custom colors to match your home.</li>
+              <li><strong>Exposed Aggregate:</strong> A textured finish that reveals the natural stone aggregate within the concrete. Popular for its non-slip surface and natural appearance.</li>
+              <li><strong>Borders & Accents:</strong> Decorative borders in contrasting colors or patterns add visual interest and define the driveway edges.</li>
+            </ul>
+            
+            <h3 class="text-2xl font-bold text-secondary-dark mt-10 mb-4">Understanding Driveway Costs in Port Orange</h3>
+            
+            <p>Several factors affect the cost of a new concrete driveway in Volusia County:</p>
+            
+            <div class="overflow-x-auto my-8 not-prose">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="bg-secondary text-white">
+                    <th class="px-4 py-3 text-left">Factor</th>
+                    <th class="px-4 py-3 text-left">Impact on Cost</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b">
+                    <td class="px-4 py-3 font-medium">Size</td>
+                    <td class="px-4 py-3">Larger driveways cost less per square foot due to economies of scale</td>
+                  </tr>
+                  <tr class="border-b bg-gray-50">
+                    <td class="px-4 py-3 font-medium">Site Prep</td>
+                    <td class="px-4 py-3">Removing existing driveway, tree roots, or poor soil adds to prep costs</td>
+                  </tr>
+                  <tr class="border-b">
+                    <td class="px-4 py-3 font-medium">Thickness</td>
+                    <td class="px-4 py-3">5-6" for heavy vehicles costs more than standard 4" residential</td>
+                  </tr>
+                  <tr class="border-b bg-gray-50">
+                    <td class="px-4 py-3 font-medium">Decorative Options</td>
+                    <td class="px-4 py-3">Stamping, coloring, or exposed aggregate adds 40-60% to base price</td>
+                  </tr>
+                  <tr class="border-b">
+                    <td class="px-4 py-3 font-medium">Shape/Design</td>
+                    <td class="px-4 py-3">Curved driveways or complex shapes require more labor</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <p>For most Port Orange homeowners, a new standard concrete driveway falls in the $6,000-$15,000 range. Decorative options and larger sizes can reach $20,000+. We provide detailed written estimates so you know exactly what to expect.</p>
+          </div>
+          
+          <!-- FAQs -->
+          <div class="mt-16">
+            <h3 class="text-2xl font-bold mb-8">Frequently Asked Questions</h3>
+            <div class="space-y-4">
+              {faqs.map((faq, i) => (
+                <div class="border border-gray-200 rounded-xl overflow-hidden">
+                  <details class="group">
+                    <summary class="flex items-center justify-between p-5 cursor-pointer bg-white hover:bg-gray-50 transition">
+                      <span class="font-semibold text-secondary-dark pr-4">{faq.q}</span>
+                      <svg class="w-5 h-5 text-primary flex-shrink-0 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </summary>
+                    <div class="px-5 pb-5 text-gray-600">{faq.a}</div>
+                  </details>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        
+        <!-- Sidebar -->
+        <div class="lg:col-span-1">
+          <!-- Quote Form Card -->
+          <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 sticky top-24">
+            <div class="text-center mb-6">
+              <div class="inline-flex items-center gap-2 bg-trust/10 text-trust px-3 py-1 rounded-full text-xs font-semibold mb-3">
+                <span class="w-2 h-2 bg-trust rounded-full animate-pulse"></span>
+                Respond Within 1 Hour
+              </div>
+              <h3 class="text-2xl font-bold">Get Your Free Quote</h3>
+              <p class="text-gray-500 text-sm mt-1">No obligation estimate</p>
+            </div>
+            
+            <iframe 
+              src="https://api.leadconnectorhq.com/widget/survey/J563qSsU4L7hu5RP6da1" 
+              style="width:100%;height:450px;border:none;"
+              title="Get a Free Driveway Quote"
+            ></iframe>
+            
+            <div class="mt-4 text-center">
+              <p class="text-xs text-gray-400 mb-3">Or call us directly:</p>
+              <a href={site.phoneLink} class="flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-primary-dark text-white py-3 rounded-lg font-bold hover:shadow-lg transition">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                {site.phone}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-2xl font-bold mb-8 text-center">What Our Driveway Customers Say</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        {reviews.slice(0, 3).map(review => (
+          <div class="bg-white p-6 rounded-xl shadow-sm border">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold" style={`background-color: ${review.color}`}>
+                {review.name.charAt(0)}
+              </div>
+              <div>
+                <div class="font-semibold">{review.name}</div>
+                <div class="text-sm text-gray-500">{review.location}</div>
+              </div>
+            </div>
+            <div class="text-accent mb-3">★★★★★</div>
+            <p class="text-gray-600 text-sm">"{review.text}"</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="py-16 bg-secondary text-white text-center">
-    <div class="max-w-4xl mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-4">Get Your Free Driveway Estimate</h2>
-      <p class="text-gray-300 mb-8">Call today for a no-obligation quote on your concrete driveway project.</p>
-      <a href={site.phoneLink} class="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark px-8 py-4 rounded-lg font-bold text-lg transition">
-        {site.phone}
-      </a>
+  <!-- Other Services -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-2xl font-bold mb-8 text-center">Our Other Concrete Services</h2>
+      <div class="grid md:grid-cols-4 gap-6">
+        {site.services.filter(s => s.slug !== 'concrete-driveway-contractors').map(service => (
+          <a href={`/${service.slug}/`} class="bg-gray-50 p-6 rounded-xl hover:shadow-lg transition group border border-gray-100">
+            <h3 class="font-bold mb-2 group-hover:text-primary transition">{service.name}</h3>
+            <p class="text-gray-600 text-sm mb-3">{service.description}</p>
+            <span class="text-primary text-sm font-medium">{service.priceRange}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-gradient-to-r from-primary to-primary-dark text-white">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4">Ready for Your New Driveway?</h2>
+      <p class="text-xl opacity-90 mb-8">Get a free, no-obligation estimate for your concrete driveway project.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href={site.phoneLink} class="inline-flex items-center justify-center gap-3 bg-white text-primary px-8 py-4 rounded-xl font-bold text-lg hover:bg-gray-100 transition">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          Call {site.phone}
+        </a>
+        <a href="/contact/" class="inline-flex items-center justify-center border-2 border-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white hover:text-primary transition">
+          Request Quote Online
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>
