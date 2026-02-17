@@ -3,7 +3,7 @@ export const site = {
   shortName: "Port Orange Concrete",
   tagline: "Volusia County's Trusted Concrete Experts",
   title: "Concrete Contractors Port Orange FL | Driveways, Patios, Slabs | Free Estimates",
-  description: "Port Orange's #1 rated concrete contractors. Expert driveways, patios, slabs & stamped concrete. Licensed, insured, 20+ years experience. Call (386) 220-8770 for your FREE estimate!",
+  description: "Port Orange's #1 rated concrete contractors. Expert driveways, patios, slabs & stamped concrete. Licensed, insured, 40+ years experience. Call (386) 220-8770 for your FREE estimate!",
   phone: "(386) 220-8770",
   phoneLink: "tel:+13862208770",
   email: "info@concreteportorange.com",
@@ -82,7 +82,7 @@ export const site = {
     google: "https://maps.google.com/?q=Port+Orange+Concrete+Co"
   },
   stats: {
-    yearsExperience: "20+",
+    yearsExperience: "40+",
     projectsCompleted: "1,500+",
     rating: "5.0",
     reviewCount: "127"
