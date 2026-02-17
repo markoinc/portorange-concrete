@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout 
+  title={`Terms of Service | ${site.name}`}
+  description={`Terms of service for ${site.name}. Read our terms and conditions for concrete services.`}
+  canonical="/terms/"
+>
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4">
+      <h1 class="text-4xl font-bold mb-8">Terms of Service</h1>
+      <p class="text-gray-500 mb-8">Last updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+      
+      <div class="prose prose-lg max-w-none text-gray-600">
+        <h2 class="text-2xl font-semibold text-gray-900 mt-8 mb-4">Agreement to Terms</h2>
+        <p>By using our website or engaging our services, you agree to be bound by these Terms of Service. If you disagree with any part of these terms, you may not use our services.</p>
+
+        <h2 class="text-2xl font-semibold text-gray-900 mt-8 mb-4">Services</h2>
+        <p>{site.name} provides concrete installation, repair, and related services in Port Orange and surrounding areas. All services are subject to:</p>
+        <ul class="list-disc pl-6 space-y-2 mb-6">
+          <li>Availability and scheduling</li>
+          <li>Site conditions and accessibility</li>
+          <li>Weather conditions</li>
+          <li>Required permits and approvals</li>
+        </ul>
+
+        <h2 class="text-2xl font-semibold text-gray-900 mt-8 mb-4">Estimates and Pricing</h2>
+        <p>Estimates provided by {site.name} are:</p>
+        <ul class="list-disc pl-6 space-y-2 mb-6">
+          <li>Based on information provided and visual inspection</li>
+          <li>Subject to change if site conditions differ from assessment</li>
+          <li>Valid for 30 days unless otherwise stated</li>
+          <li>Not a guarantee of final price until work is contracted</li>
+        </ul>
+
+        <h2 class="text-2xl font-semibold text-gray-900 mt-8 mb-4">Payment Terms</h2>
+        <p>Payment terms will be specified in your service agreement. Generally:</p>
+        <ul class="list-disc pl-6 space-y-2 mb-6">
+          <li>A deposit may be required to schedule work</li>
+          <li>Final payment is due upon completion</li>
+          <li>We accept cash, check, and major credit cards</li>
+        </ul>
+
+        <h2 class="text-2xl font-semibold text-gray-900 mt-8 mb-4">Warranties</h2>
+        <p>Our work is warranted against defects in materials and workmanship. Warranties do not cover:</p>
+        <ul class="list-disc pl-6 space-y-2 mb-6">
+          <li>Normal wear and weathering</li>
+          <li>Damage from improper use or care</li>
+          <li>Cosmetic issues such as minor cracking or color variation</li>
+          <li>Issues caused by ground movement or settling</li>
+        </ul>
+
+        <h2 class="text-2xl font-semibold text-gray-900 mt-8 mb-4">Limitation of Liability</h2>
+        <p>{site.name}'s liability is limited to the cost of services provided. We are not liable for consequential, incidental, or indirect damages.</p>
+
+        <h2 class="text-2xl font-semibold text-gray-900 mt-8 mb-4">Website Use</h2>
+        <p>The content on this website is for informational purposes only. We make no warranties about the accuracy or completeness of website content.</p>
+
+        <h2 class="text-2xl font-semibold text-gray-900 mt-8 mb-4">Governing Law</h2>
+        <p>These terms are governed by the laws of the State of Florida. Any disputes will be resolved in Volusia County, Florida courts.</p>
+
+        <h2 class="text-2xl font-semibold text-gray-900 mt-8 mb-4">Contact</h2>
+        <p>Questions about these terms? Contact us:</p>
+        <p class="mb-4">
+          <strong>{site.name}</strong><br>
+          {site.address.full}<br>
+          Phone: <a href={site.phoneLink} class="text-primary hover:underline">{site.phone}</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

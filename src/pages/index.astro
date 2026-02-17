@@ -1,0 +1,277 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site, reviews } from '../data/site';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": `${site.url}/#business`,
+  "name": site.name,
+  "telephone": site.phone,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": site.address.street,
+    "addressLocality": site.address.city,
+    "addressRegion": site.address.state,
+    "postalCode": site.address.zip,
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": site.geo.lat,
+    "longitude": site.geo.lng
+  },
+  "url": site.url,
+  "priceRange": "$$",
+  "openingHours": site.hours.schema,
+  "areaServed": site.serviceAreas.map(area => ({ "@type": "City", "name": area })),
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": reviews.length.toString(),
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": reviews.map(r => ({
+    "@type": "Review",
+    "author": { "@type": "Person", "name": r.name },
+    "datePublished": r.date,
+    "reviewRating": { "@type": "Rating", "ratingValue": r.rating.toString() },
+    "reviewBody": r.text
+  })),
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Concrete Services",
+    "itemListElement": site.services.map(s => ({
+      "@type": "Offer",
+      "itemOffered": { "@type": "Service", "name": s.name }
+    }))
+  },
+  "description": site.description
+};
+---
+
+<BaseLayout 
+  title={`${site.name} | Concrete Driveways, Patios & Slabs | Port Orange FL`}
+  description={site.description}
+  canonical="/"
+  schema={schema}
+>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-secondary-dark to-secondary py-16 md:py-24 relative overflow-hidden">
+    <div class="absolute inset-0 bg-black/20"></div>
+    <div class="max-w-7xl mx-auto px-4 relative z-10">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="text-white">
+          <div class="inline-flex items-center gap-2 bg-primary/20 border border-primary/30 px-4 py-2 rounded-full text-primary text-sm font-medium mb-6">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            Trusted Local Concrete Contractors
+          </div>
+          <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+            Port Orange's Premier <span class="text-primary">Concrete Contractors</span>
+          </h1>
+          <p class="text-lg text-gray-300 mb-8 leading-relaxed">
+            Quality driveways, patios, and slabs built to last. Serving Port Orange and Volusia County with expert craftsmanship and fair pricing.
+          </p>
+          <div class="flex flex-wrap gap-4 mb-8">
+            <div class="flex items-center gap-2 text-gray-300">
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              Free Estimates
+            </div>
+            <div class="flex items-center gap-2 text-gray-300">
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              Licensed & Insured
+            </div>
+            <div class="flex items-center gap-2 text-gray-300">
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              Quality Guaranteed
+            </div>
+          </div>
+          <a href={site.phoneLink} class="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-lg text-xl font-bold transition shadow-lg shadow-primary/30">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            {site.phone}
+          </a>
+        </div>
+        <div class="bg-white rounded-xl p-8 shadow-2xl">
+          <h3 class="text-2xl font-bold text-center mb-2">Get Your Free Quote</h3>
+          <p class="text-gray-500 text-center text-sm mb-6">We'll respond within 24 hours</p>
+          <form class="space-y-4" action="/contact/" method="GET">
+            <input type="text" name="name" placeholder="Your Name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none" required>
+            <input type="tel" name="phone" placeholder="Phone Number" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none" required>
+            <select name="service" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+              <option value="">Select Service Needed</option>
+              <option value="driveway">Concrete Driveway</option>
+              <option value="patio">Concrete Patio</option>
+              <option value="slab">Concrete Slab</option>
+              <option value="repair">Concrete Repair</option>
+              <option value="other">Other</option>
+            </select>
+            <textarea name="message" rows="3" placeholder="Tell us about your project" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none"></textarea>
+            <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-4 rounded-lg transition">
+              Get Free Estimate
+            </button>
+          </form>
+          <div class="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg text-center text-sm text-yellow-800">
+            <strong>🔥 Limited Availability</strong> – We're booking 2-3 weeks out
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Bar -->
+  <section class="bg-gray-50 py-8 border-b">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center">
+            <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          </div>
+          <div>
+            <div class="font-semibold">Licensed</div>
+            <div class="text-sm text-gray-500">& Insured</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center">
+            <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          </div>
+          <div>
+            <div class="font-semibold">5-Star</div>
+            <div class="text-sm text-gray-500">Reviews</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center">
+            <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+          </div>
+          <div>
+            <div class="font-semibold">20+ Years</div>
+            <div class="text-sm text-gray-500">Experience</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center">
+            <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm-2 14l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+          </div>
+          <div>
+            <div class="font-semibold">Free</div>
+            <div class="text-sm text-gray-500">Estimates</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">How We Work</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">From estimate to completion, we make the process simple</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="text-center p-8 bg-gray-50 rounded-xl hover:shadow-lg transition">
+          <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">1</div>
+          <h3 class="text-xl font-semibold mb-3">Free Consultation</h3>
+          <p class="text-gray-600">Call us or fill out our form. We'll discuss your project and schedule a free on-site estimate.</p>
+        </div>
+        <div class="text-center p-8 bg-gray-50 rounded-xl hover:shadow-lg transition">
+          <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">2</div>
+          <h3 class="text-xl font-semibold mb-3">Detailed Quote</h3>
+          <p class="text-gray-600">We provide a transparent, written estimate with no hidden fees. You'll know exactly what to expect.</p>
+        </div>
+        <div class="text-center p-8 bg-gray-50 rounded-xl hover:shadow-lg transition">
+          <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">3</div>
+          <h3 class="text-xl font-semibold mb-3">Quality Install</h3>
+          <p class="text-gray-600">Our experienced crew completes your project on time, leaving you with concrete that lasts decades.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Concrete Services</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">Quality concrete work for residential and commercial properties</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {site.services.map(service => (
+          <a href={`/${service.slug}/`} class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition group">
+            <div class="h-48 bg-gradient-to-br from-secondary to-secondary-dark flex items-center justify-center">
+              <svg class="w-16 h-16 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M19 12h-2v3h-3v2h5v-5zM7 9h3V7H5v5h2V9zm14-6H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16.01H3V4.99h18v14.02z"/></svg>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2 group-hover:text-primary transition">{service.name}</h3>
+              <p class="text-gray-600 text-sm">{service.description}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">What Our Customers Say</h2>
+        <div class="inline-flex items-center gap-2 bg-white px-6 py-3 rounded-full shadow-sm mt-4">
+          <span class="text-primary text-lg">★★★★★</span>
+          <span class="font-semibold">5.0 Rating</span>
+          <span class="text-gray-500">({reviews.length} reviews)</span>
+        </div>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {reviews.slice(0, 3).map(review => (
+          <div class="bg-white p-6 rounded-xl shadow-sm border hover:shadow-lg transition">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg" style={`background-color: ${review.color}`}>
+                {review.name.charAt(0)}
+              </div>
+              <div>
+                <div class="font-semibold">{review.name}</div>
+                <div class="text-primary text-sm">★★★★★</div>
+              </div>
+            </div>
+            <p class="text-gray-600">{review.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Areas -->
+  <section class="py-20 bg-secondary text-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Serving Volusia County</h2>
+        <p class="text-gray-300">Professional concrete services throughout the area</p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-4">
+        {site.serviceAreas.map(area => (
+          <span class="bg-white/10 px-6 py-2 rounded-full text-sm font-medium">{area}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-gradient-to-r from-primary to-primary-dark text-white text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Start Your Project?</h2>
+      <p class="text-lg opacity-90 mb-8">Get a free, no-obligation estimate for your concrete project today.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href={site.phoneLink} class="inline-flex items-center justify-center gap-3 bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          {site.phone}
+        </a>
+        <a href="/contact/" class="inline-flex items-center justify-center gap-2 border-2 border-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-primary transition">
+          Request Free Quote
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

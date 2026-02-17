@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+
+const service = {
+  name: "Concrete Repair",
+  title: "Concrete Repair Contractors Port Orange FL",
+  description: "Expert concrete crack repair, resurfacing & restoration in Port Orange. Fix driveways, patios & slabs. Call (386) 220-8770 for free assessment.",
+  hero: "Concrete Repair & Restoration",
+  intro: "Don't replace when you can repair. Our concrete restoration services fix cracks, spalling, and surface damage, saving you money while extending the life of your concrete."
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": service.name,
+  "provider": { "@type": "LocalBusiness", "name": site.name, "telephone": site.phone },
+  "areaServed": site.serviceAreas.map(a => ({ "@type": "City", "name": a })),
+  "description": service.description
+};
+---
+
+<BaseLayout title={service.title} description={service.description} canonical="/concrete-repair-contractors/" schema={schema}>
+  <section class="bg-gradient-to-br from-secondary-dark to-secondary py-20 text-white text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">{service.hero}</h1>
+      <p class="text-xl text-gray-300 mb-8">{service.intro}</p>
+      <a href={site.phoneLink} class="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark px-8 py-4 rounded-lg font-bold text-lg transition">Call {site.phone}</a>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-6">Concrete Repair Services in Port Orange</h2>
+      <p class="text-gray-600 mb-6">Cracked, chipped, or settling concrete doesn't always need to be replaced. Our repair services can restore your concrete's appearance and functionality at a fraction of replacement cost. We assess each situation and recommend the most cost-effective solution.</p>
+      
+      <h3 class="text-2xl font-semibold mt-10 mb-4">Repair Services We Offer:</h3>
+      <ul class="space-y-3 mb-10">
+        <li class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span><strong>Crack Repair</strong> – Fill and seal cracks before they spread and worsen</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span><strong>Resurfacing</strong> – Apply new surface over worn concrete</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span><strong>Spalling Repair</strong> – Fix flaking, peeling, or pitting surfaces</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span><strong>Slab Leveling</strong> – Lift and level sunken or uneven concrete</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span><strong>Expansion Joint Repair</strong> – Replace worn or failed joint material</span>
+        </li>
+      </ul>
+
+      <h3 class="text-2xl font-semibold mt-10 mb-4">When to Repair vs. Replace</h3>
+      <div class="grid md:grid-cols-2 gap-6 mb-10">
+        <div class="bg-green-50 border border-green-200 p-6 rounded-xl">
+          <h4 class="font-semibold text-green-800 mb-2">✓ Good Candidates for Repair</h4>
+          <ul class="text-gray-600 text-sm space-y-1">
+            <li>• Hairline to moderate cracks</li>
+            <li>• Surface spalling or pitting</li>
+            <li>• Minor settling (less than 1")</li>
+            <li>• Cosmetic damage</li>
+            <li>• Localized damage areas</li>
+          </ul>
+        </div>
+        <div class="bg-red-50 border border-red-200 p-6 rounded-xl">
+          <h4 class="font-semibold text-red-800 mb-2">✗ Better to Replace</h4>
+          <ul class="text-gray-600 text-sm space-y-1">
+            <li>• Large structural cracks</li>
+            <li>• Extensive heaving or settling</li>
+            <li>• More than 50% surface damage</li>
+            <li>• Major drainage issues</li>
+            <li>• Foundation problems</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="text-2xl font-semibold mt-10 mb-4">Repair Costs</h3>
+      <p class="text-gray-600 mb-4">Concrete repair is typically 25-50% the cost of replacement:</p>
+      <ul class="space-y-2 mb-10 text-gray-600">
+        <li>• Crack filling: $1-$3 per linear foot</li>
+        <li>• Resurfacing: $3-$8 per square foot</li>
+        <li>• Slab leveling: $500-$1,500 per slab</li>
+        <li>• Spot repairs: $100-$500 per area</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-16 bg-secondary text-white text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-4">Free Repair Assessment</h2>
+      <p class="text-gray-300 mb-8">We'll inspect your concrete and recommend the best solution.</p>
+      <a href={site.phoneLink} class="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark px-8 py-4 rounded-lg font-bold text-lg transition">{site.phone}</a>
+    </div>
+  </section>
+</BaseLayout>

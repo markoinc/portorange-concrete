@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout 
+  title="Page Not Found | Port Orange Concrete Co."
+  description="The page you're looking for doesn't exist. Return to our homepage or contact us for help."
+  canonical="/404/"
+>
+  <section class="py-20 text-center">
+    <div class="max-w-2xl mx-auto px-4">
+      <h1 class="text-6xl font-bold text-primary mb-4">404</h1>
+      <h2 class="text-3xl font-bold mb-6">Page Not Found</h2>
+      <p class="text-gray-600 mb-8">The page you're looking for doesn't exist or has been moved. Let's get you back on track.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/" class="bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-lg font-semibold transition">
+          Go Home
+        </a>
+        <a href="/contact/" class="border-2 border-primary text-primary hover:bg-primary hover:text-white px-8 py-4 rounded-lg font-semibold transition">
+          Contact Us
+        </a>
+      </div>
+      <p class="text-gray-500 mt-8">Or call us directly at <a href={site.phoneLink} class="text-primary font-semibold hover:underline">{site.phone}</a></p>
+    </div>
+  </section>
+</BaseLayout>

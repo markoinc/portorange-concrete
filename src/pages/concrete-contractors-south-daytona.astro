@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+
+const location = {
+  name: "South Daytona",
+  slug: "concrete-contractors-south-daytona"
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": site.name + " - " + location.name,
+  "telephone": site.phone,
+  "areaServed": { "@type": "City", "name": location.name }
+};
+---
+
+<BaseLayout 
+  title={"Concrete Contractors " + location.name + " FL | Driveways, Patios, Slabs"}
+  description={"Professional concrete contractors in " + location.name + ", FL. " + site.name + " offers driveways, patios, slabs & more. Call " + site.phone + " for free estimate."}
+  canonical={"/" + location.slug + "/"}
+  schema={schema}
+>
+  <section class="bg-gradient-to-br from-secondary-dark to-secondary py-20 text-white text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">Concrete Contractors in {location.name}</h1>
+      <p class="text-xl text-gray-300 mb-8">Quality concrete services for {location.name} homes and businesses</p>
+      <a href={site.phoneLink} class="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark px-8 py-4 rounded-lg font-bold text-lg transition">
+        Call {site.phone}
+      </a>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-6">{location.name} Concrete Services</h2>
+      <p class="text-gray-600 mb-6">{site.name} proudly serves {location.name} and surrounding areas with professional concrete installation and repair services. Whether you need a new driveway, patio, or foundation work, our experienced team delivers quality results.</p>
+      
+      <h3 class="text-2xl font-semibold mt-10 mb-4">Services We Offer in {location.name}:</h3>
+      <div class="grid md:grid-cols-2 gap-4 mb-10">
+        {site.services.map(service => (
+          <a href={"/" + service.slug + "/"} class="flex items-center gap-3 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+            <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            <span class="font-medium">{service.name}</span>
+          </a>
+        ))}
+      </div>
+
+      <h3 class="text-2xl font-semibold mt-10 mb-4">Why {location.name} Chooses Us</h3>
+      <ul class="space-y-3 mb-10">
+        <li class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span><strong>Local Experience</strong> – We know {location.name}'s soil conditions and building requirements</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span><strong>Licensed & Insured</strong> – Full coverage for your peace of mind</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span><strong>Free Estimates</strong> – No-obligation quotes for your project</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span><strong>Quality Materials</strong> – 4,000 PSI concrete with proper reinforcement</span>
+        </li>
+      </ul>
+
+      <div class="bg-gray-50 p-6 rounded-xl">
+        <h3 class="text-xl font-semibold mb-4">Contact Us for {location.name} Service</h3>
+        <p class="text-gray-600 mb-4">Ready for your free estimate? Call us today or visit our contact page.</p>
+        <div class="flex flex-wrap gap-4">
+          <a href={site.phoneLink} class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-lg font-semibold transition">
+            {site.phone}
+          </a>
+          <a href="/contact/" class="inline-flex items-center gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white px-6 py-3 rounded-lg font-semibold transition">
+            Request Quote
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-secondary text-white text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-4">{location.name} Concrete Experts</h2>
+      <p class="text-gray-300 mb-8">Professional concrete services for residential and commercial properties.</p>
+      <a href={site.phoneLink} class="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark px-8 py-4 rounded-lg font-bold text-lg transition">
+        {site.phone}
+      </a>
+    </div>
+  </section>
+</BaseLayout>

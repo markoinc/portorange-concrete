@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site, locations } from '../data/site';
+---
+
+<BaseLayout 
+  title={`Service Areas | ${site.name} | Volusia County Concrete`}
+  description={`${site.name} serves Port Orange, Daytona Beach, Ormond Beach, New Smyrna Beach, DeLand, Deltona and all of Volusia County. Call ${site.phone}.`}
+  canonical="/locations/"
+>
+  <section class="bg-gradient-to-br from-secondary-dark to-secondary py-20 text-white text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">Service Areas</h1>
+      <p class="text-xl text-gray-300">Serving Volusia County and surrounding communities</p>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold mb-4">Concrete Services Throughout Volusia County</h2>
+        <p class="text-gray-600 max-w-3xl mx-auto">{site.name} provides professional concrete services to homeowners and businesses throughout Volusia County. Based in Port Orange, we serve the entire region with quality driveways, patios, slabs, and more.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 mb-16">
+        {locations.map(location => (
+          <a href={`/${location.slug}/`} class="bg-white p-6 rounded-xl shadow-sm border hover:shadow-lg hover:border-primary transition group">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary transition">
+                <svg class="w-6 h-6 text-primary group-hover:text-white transition" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-lg group-hover:text-primary transition">{location.name}</h3>
+                <p class="text-gray-500 text-sm">Concrete services</p>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div class="bg-gray-50 p-8 rounded-xl">
+        <h3 class="text-2xl font-bold mb-4 text-center">All Service Areas</h3>
+        <div class="flex flex-wrap justify-center gap-3">
+          {site.serviceAreas.map(area => (
+            <span class="bg-white px-4 py-2 rounded-full text-sm border">{area}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-secondary text-white text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-4">Need Concrete Work in Your Area?</h2>
+      <p class="text-gray-300 mb-8">Contact us to see if we serve your location. Free estimates available.</p>
+      <a href={site.phoneLink} class="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark px-8 py-4 rounded-lg font-bold text-lg transition">
+        {site.phone}
+      </a>
+    </div>
+  </section>
+</BaseLayout>

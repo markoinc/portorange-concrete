@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout 
+  title={`About ${site.name} | Port Orange Concrete Contractors`}
+  description={`Learn about ${site.name} - trusted concrete contractors serving Port Orange and Volusia County. 20+ years experience. Licensed & insured.`}
+  canonical="/about/"
+>
+  <section class="bg-gradient-to-br from-secondary-dark to-secondary py-20 text-white text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">About {site.name}</h1>
+      <p class="text-xl text-gray-300">Your trusted local concrete contractors</p>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="prose prose-lg max-w-none">
+        <h2 class="text-3xl font-bold mb-6">Local Concrete Experts You Can Trust</h2>
+        <p class="text-gray-600 mb-6">{site.name} has been providing quality concrete services to Port Orange and the surrounding Volusia County area for over two decades. What started as a small family operation has grown into one of the most trusted concrete contractors in the region.</p>
+        
+        <p class="text-gray-600 mb-6">We take pride in our work and treat every project—whether it's a small patio or a large commercial foundation—with the same attention to detail and commitment to quality. Our crew shows up on time, communicates clearly, and leaves your property clean when the job is done.</p>
+
+        <h3 class="text-2xl font-semibold mt-10 mb-4">Why Choose Us?</h3>
+        <div class="grid md:grid-cols-2 gap-6 mb-10">
+          <div class="bg-gray-50 p-6 rounded-xl border-l-4 border-primary">
+            <h4 class="font-semibold mb-2">20+ Years Experience</h4>
+            <p class="text-gray-600 text-sm">We've poured thousands of driveways, patios, and slabs throughout Volusia County. We know Florida's soil conditions and climate challenges.</p>
+          </div>
+          <div class="bg-gray-50 p-6 rounded-xl border-l-4 border-primary">
+            <h4 class="font-semibold mb-2">Licensed & Insured</h4>
+            <p class="text-gray-600 text-sm">Fully licensed Florida contractor with comprehensive liability insurance. Your property is protected.</p>
+          </div>
+          <div class="bg-gray-50 p-6 rounded-xl border-l-4 border-primary">
+            <h4 class="font-semibold mb-2">Quality Materials</h4>
+            <p class="text-gray-600 text-sm">We use 4,000 PSI concrete with proper reinforcement. No shortcuts, no cheap materials.</p>
+          </div>
+          <div class="bg-gray-50 p-6 rounded-xl border-l-4 border-primary">
+            <h4 class="font-semibold mb-2">Fair, Transparent Pricing</h4>
+            <p class="text-gray-600 text-sm">Detailed written quotes with no hidden fees. The price we quote is the price you pay.</p>
+          </div>
+          <div class="bg-gray-50 p-6 rounded-xl border-l-4 border-primary">
+            <h4 class="font-semibold mb-2">On-Time Completion</h4>
+            <p class="text-gray-600 text-sm">We respect your time. Projects start and finish when we say they will.</p>
+          </div>
+          <div class="bg-gray-50 p-6 rounded-xl border-l-4 border-primary">
+            <h4 class="font-semibold mb-2">Clean Job Sites</h4>
+            <p class="text-gray-600 text-sm">We clean up after ourselves. Your property looks better when we leave, not worse.</p>
+          </div>
+        </div>
+
+        <h3 class="text-2xl font-semibold mt-10 mb-4">Our Services</h3>
+        <ul class="space-y-2 mb-10">
+          {site.services.map(service => (
+            <li class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              <a href={`/${service.slug}/`} class="text-gray-700 hover:text-primary transition">{service.name}</a>
+            </li>
+          ))}
+        </ul>
+
+        <h3 class="text-2xl font-semibold mt-10 mb-4">Areas We Serve</h3>
+        <p class="text-gray-600 mb-4">We provide concrete services throughout Volusia County, including:</p>
+        <div class="flex flex-wrap gap-2 mb-10">
+          {site.serviceAreas.map(area => (
+            <span class="bg-gray-100 px-4 py-2 rounded-full text-sm">{area}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-primary text-white text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-4">Ready to Get Started?</h2>
+      <p class="opacity-90 mb-8">Contact us today for a free estimate on your concrete project.</p>
+      <a href={site.phoneLink} class="inline-flex items-center gap-3 bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition">
+        {site.phone}
+      </a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,95 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+
+const service = {
+  name: "Stamped Concrete",
+  title: "Stamped Concrete Contractors Port Orange FL",
+  description: "Beautiful stamped concrete driveways, patios & pool decks in Port Orange. Stone, brick & slate patterns. Call (386) 220-8770 for free estimate.",
+  hero: "Decorative Stamped Concrete",
+  intro: "Transform your outdoor spaces with beautiful stamped concrete that mimics natural stone, brick, slate, or custom patterns at a fraction of the cost."
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": service.name,
+  "provider": { "@type": "LocalBusiness", "name": site.name, "telephone": site.phone },
+  "areaServed": site.serviceAreas.map(a => ({ "@type": "City", "name": a })),
+  "description": service.description
+};
+---
+
+<BaseLayout title={service.title} description={service.description} canonical="/stamped-concrete-contractors/" schema={schema}>
+  <section class="bg-gradient-to-br from-secondary-dark to-secondary py-20 text-white text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">{service.hero}</h1>
+      <p class="text-xl text-gray-300 mb-8">{service.intro}</p>
+      <a href={site.phoneLink} class="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark px-8 py-4 rounded-lg font-bold text-lg transition">Call {site.phone}</a>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-6">Stamped Concrete in Port Orange</h2>
+      <p class="text-gray-600 mb-6">Stamped concrete combines the durability of concrete with the beauty of natural materials. Our skilled team creates stunning patterns that enhance driveways, patios, pool decks, and walkways throughout Port Orange and Volusia County.</p>
+      
+      <h3 class="text-2xl font-semibold mt-10 mb-4">Popular Stamp Patterns:</h3>
+      <div class="grid md:grid-cols-2 gap-6 mb-10">
+        <div class="bg-gray-50 p-6 rounded-xl">
+          <h4 class="font-semibold mb-2">Ashlar Slate</h4>
+          <p class="text-gray-600 text-sm">Elegant rectangular stone pattern, perfect for patios and entryways.</p>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-xl">
+          <h4 class="font-semibold mb-2">Cobblestone</h4>
+          <p class="text-gray-600 text-sm">Classic European look ideal for driveways and walkways.</p>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-xl">
+          <h4 class="font-semibold mb-2">Herringbone Brick</h4>
+          <p class="text-gray-600 text-sm">Traditional brick pattern at a fraction of real brick cost.</p>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-xl">
+          <h4 class="font-semibold mb-2">Flagstone</h4>
+          <p class="text-gray-600 text-sm">Natural stone appearance with irregular shapes.</p>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-xl">
+          <h4 class="font-semibold mb-2">Wood Plank</h4>
+          <p class="text-gray-600 text-sm">Mimics wood decking without rot, warping, or termite concerns.</p>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-xl">
+          <h4 class="font-semibold mb-2">Custom Designs</h4>
+          <p class="text-gray-600 text-sm">Unique patterns including logos, borders, and combinations.</p>
+        </div>
+      </div>
+
+      <h3 class="text-2xl font-semibold mt-10 mb-4">Color Options</h3>
+      <p class="text-gray-600 mb-6">We offer integral colors mixed into the concrete and release colors applied during stamping. Popular choices include:</p>
+      <ul class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
+        <li class="bg-amber-100 p-3 rounded text-center text-sm">Sandstone</li>
+        <li class="bg-gray-300 p-3 rounded text-center text-sm">Slate Gray</li>
+        <li class="bg-red-200 p-3 rounded text-center text-sm">Terra Cotta</li>
+        <li class="bg-amber-700 text-white p-3 rounded text-center text-sm">Adobe Buff</li>
+        <li class="bg-gray-600 text-white p-3 rounded text-center text-sm">Charcoal</li>
+        <li class="bg-stone-400 p-3 rounded text-center text-sm">Natural Gray</li>
+        <li class="bg-amber-200 p-3 rounded text-center text-sm">Desert Tan</li>
+        <li class="bg-emerald-800 text-white p-3 rounded text-center text-sm">Forest Green</li>
+      </ul>
+
+      <h3 class="text-2xl font-semibold mt-10 mb-4">Stamped Concrete Pricing</h3>
+      <p class="text-gray-600 mb-4">Stamped concrete typically costs $12-$25 per square foot, depending on pattern complexity and color options:</p>
+      <ul class="space-y-2 mb-10 text-gray-600">
+        <li>• Basic patterns with one color: $12-$15/sqft</li>
+        <li>• Medium complexity with accent colors: $15-$20/sqft</li>
+        <li>• Premium patterns with borders/multiple colors: $20-$25/sqft</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-16 bg-secondary text-white text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-4">Get Your Stamped Concrete Quote</h2>
+      <p class="text-gray-300 mb-8">Free design consultation and estimates.</p>
+      <a href={site.phoneLink} class="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark px-8 py-4 rounded-lg font-bold text-lg transition">{site.phone}</a>
+    </div>
+  </section>
+</BaseLayout>

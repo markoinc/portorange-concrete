@@ -1,0 +1,144 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+
+const service = {
+  name: "Concrete Driveways",
+  title: "Concrete Driveway Contractors Port Orange FL",
+  description: "Expert concrete driveway installation, repair, and resurfacing in Port Orange. New driveways from $8-$18/sqft. Call (386) 220-8770 for a free estimate.",
+  hero: "Professional Concrete Driveway Services",
+  intro: "A quality concrete driveway adds value to your home while providing a durable, low-maintenance surface for decades. Our experienced team delivers expert driveway installation, extensions, and repairs throughout Port Orange and Volusia County."
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": service.name,
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": site.name,
+    "telephone": site.phone,
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": site.address.street,
+      "addressLocality": site.address.city,
+      "addressRegion": site.address.state,
+      "postalCode": site.address.zip
+    }
+  },
+  "areaServed": site.serviceAreas.map(a => ({ "@type": "City", "name": a })),
+  "description": service.description
+};
+
+const faqs = [
+  {
+    q: "How much does a concrete driveway cost in Port Orange?",
+    a: "Concrete driveway costs in Port Orange range from $8-$18 per square foot. A standard 400 sq ft single-car driveway costs $3,200-$7,200. A two-car 600 sq ft driveway runs $4,800-$10,800. Stamped or decorative concrete adds 40-60% to the cost."
+  },
+  {
+    q: "How thick should a concrete driveway be?",
+    a: "Residential driveways should be 4 inches thick minimum for cars and light trucks. For heavy vehicles like RVs or trailers, we recommend 5-6 inches. The apron where it meets the street should be 6 inches thick."
+  },
+  {
+    q: "How long does a concrete driveway last?",
+    a: "A properly installed concrete driveway lasts 25-30 years with minimal maintenance. Florida's warm climate is actually ideal for concrete longevity since we don't have freeze-thaw cycles that damage driveways up north."
+  },
+  {
+    q: "How long until I can drive on a new driveway?",
+    a: "Wait 7 days before driving passenger vehicles on new concrete. Heavy trucks and RVs should wait 28 days for full cure. You can walk on it after 24-48 hours."
+  }
+];
+---
+
+<BaseLayout 
+  title={service.title}
+  description={service.description}
+  canonical="/concrete-driveway-contractors/"
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-secondary-dark to-secondary py-20 text-white text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">{service.hero}</h1>
+      <p class="text-xl text-gray-300 mb-8">{service.intro}</p>
+      <a href={site.phoneLink} class="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark px-8 py-4 rounded-lg font-bold text-lg transition">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        Call {site.phone}
+      </a>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-6">Concrete Driveway Services in Port Orange</h2>
+      <p class="text-gray-600 mb-6">Whether you need a brand new driveway, want to extend your existing one, or need repairs, our team has the experience and equipment to get the job done right. We use high-quality 4,000 PSI concrete with proper reinforcement for driveways that last.</p>
+      
+      <h3 class="text-2xl font-semibold mt-10 mb-4">Our Driveway Services Include:</h3>
+      <ul class="space-y-3 mb-10">
+        <li class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span><strong>New Driveway Installation</strong> – Complete tear-out and pour with proper grading and base preparation</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span><strong>Driveway Extensions</strong> – Add parking space with seamless matching concrete</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span><strong>Driveway Resurfacing</strong> – Overlay worn concrete with a fresh, new surface</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span><strong>Decorative Options</strong> – Stamped patterns, exposed aggregate, and colored concrete</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span><strong>Crack Repair</strong> – Fix cracks before they spread and damage your driveway</span>
+        </li>
+      </ul>
+
+      <h3 class="text-2xl font-semibold mt-10 mb-4">Why Choose Us for Your Driveway?</h3>
+      <div class="grid md:grid-cols-2 gap-6 mb-10">
+        <div class="bg-gray-50 p-6 rounded-xl">
+          <h4 class="font-semibold mb-2">Proper Base Preparation</h4>
+          <p class="text-gray-600 text-sm">We don't cut corners. Every driveway gets proper excavation, compacted gravel base, and forms for long-lasting results.</p>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-xl">
+          <h4 class="font-semibold mb-2">Quality Materials</h4>
+          <p class="text-gray-600 text-sm">We use 4,000 PSI concrete with fiber mesh or rebar reinforcement on all driveways.</p>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-xl">
+          <h4 class="font-semibold mb-2">Experienced Crew</h4>
+          <p class="text-gray-600 text-sm">Our team has poured hundreds of driveways. We know how to handle Florida's sandy soil and weather conditions.</p>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-xl">
+          <h4 class="font-semibold mb-2">Transparent Pricing</h4>
+          <p class="text-gray-600 text-sm">No hidden fees or surprise charges. You get a detailed written quote before we start.</p>
+        </div>
+      </div>
+
+      <!-- FAQs -->
+      <h3 class="text-2xl font-semibold mt-10 mb-6">Frequently Asked Questions</h3>
+      <div class="space-y-4">
+        {faqs.map(faq => (
+          <div class="border rounded-lg p-5">
+            <h4 class="font-semibold mb-2">{faq.q}</h4>
+            <p class="text-gray-600 text-sm">{faq.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-secondary text-white text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-4">Get Your Free Driveway Estimate</h2>
+      <p class="text-gray-300 mb-8">Call today for a no-obligation quote on your concrete driveway project.</p>
+      <a href={site.phoneLink} class="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark px-8 py-4 rounded-lg font-bold text-lg transition">
+        {site.phone}
+      </a>
+    </div>
+  </section>
+</BaseLayout>

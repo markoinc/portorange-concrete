@@ -1,0 +1,144 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+
+const service = {
+  name: "Concrete Slabs",
+  title: "Concrete Slab Contractors Port Orange FL",
+  description: "Professional concrete slab installation in Port Orange. Garage slabs, shed pads, foundations & more. Call (386) 220-8770 for free estimate.",
+  hero: "Concrete Slabs & Foundations",
+  intro: "From garage floors to building foundations, we pour concrete slabs that provide the solid, level base your project needs. Proper preparation and quality materials ensure slabs that last."
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": service.name,
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": site.name,
+    "telephone": site.phone
+  },
+  "areaServed": site.serviceAreas.map(a => ({ "@type": "City", "name": a })),
+  "description": service.description
+};
+
+const faqs = [
+  {
+    q: "How thick should a concrete slab be?",
+    a: "Standard shed or utility slabs are 4 inches thick. Garage slabs should be 4-6 inches. Building foundations typically require 6+ inches with deeper footings. We'll recommend the right thickness based on your specific use case."
+  },
+  {
+    q: "Do concrete slabs need rebar?",
+    a: "Most slabs benefit from reinforcement. We typically use fiber mesh for smaller slabs and rebar or wire mesh for larger slabs, garages, and foundations. Reinforcement prevents cracking and adds strength."
+  },
+  {
+    q: "How much does a concrete slab cost?",
+    a: "Basic slabs run $5-$10 per square foot. A 10x12 shed pad costs $600-$1,200. A 20x24 garage slab costs $2,400-$4,800. Price varies based on thickness, reinforcement, and site conditions."
+  }
+];
+---
+
+<BaseLayout 
+  title={service.title}
+  description={service.description}
+  canonical="/concrete-slab-contractors/"
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-secondary-dark to-secondary py-20 text-white text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">{service.hero}</h1>
+      <p class="text-xl text-gray-300 mb-8">{service.intro}</p>
+      <a href={site.phoneLink} class="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark px-8 py-4 rounded-lg font-bold text-lg transition">
+        Call {site.phone}
+      </a>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-6">Concrete Slab Services in Port Orange</h2>
+      <p class="text-gray-600 mb-6">A properly poured concrete slab is the foundation of any successful project. Whether you're building a shed, adding a garage, or starting a new construction project, we provide the solid groundwork you need. Our team handles everything from site prep to finished pour.</p>
+      
+      <h3 class="text-2xl font-semibold mt-10 mb-4">Types of Slabs We Pour:</h3>
+      <ul class="space-y-3 mb-10">
+        <li class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span><strong>Garage Slabs</strong> – Reinforced floors for attached or detached garages</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span><strong>Shed & Storage Pads</strong> – Level foundations for sheds and outbuildings</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span><strong>Building Foundations</strong> – Monolithic and stem wall foundations</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span><strong>Workshop Floors</strong> – Heavy-duty slabs for workshops and equipment</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span><strong>Equipment Pads</strong> – AC units, generators, hot tubs</span>
+        </li>
+      </ul>
+
+      <h3 class="text-2xl font-semibold mt-10 mb-4">Our Slab Installation Process</h3>
+      <div class="space-y-4 mb-10">
+        <div class="flex gap-4 items-start">
+          <div class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">1</div>
+          <div>
+            <h4 class="font-semibold">Site Preparation</h4>
+            <p class="text-gray-600 text-sm">Clear vegetation, excavate to proper depth, and grade for drainage.</p>
+          </div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <div class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">2</div>
+          <div>
+            <h4 class="font-semibold">Base Installation</h4>
+            <p class="text-gray-600 text-sm">Lay and compact gravel base for stability and drainage.</p>
+          </div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <div class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">3</div>
+          <div>
+            <h4 class="font-semibold">Forms & Reinforcement</h4>
+            <p class="text-gray-600 text-sm">Set forms to exact dimensions, add rebar or mesh reinforcement.</p>
+          </div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <div class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">4</div>
+          <div>
+            <h4 class="font-semibold">Pour & Finish</h4>
+            <p class="text-gray-600 text-sm">Pour concrete, level, and apply desired finish.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQs -->
+      <h3 class="text-2xl font-semibold mt-10 mb-6">Frequently Asked Questions</h3>
+      <div class="space-y-4">
+        {faqs.map(faq => (
+          <div class="border rounded-lg p-5">
+            <h4 class="font-semibold mb-2">{faq.q}</h4>
+            <p class="text-gray-600 text-sm">{faq.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-secondary text-white text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-4">Get Your Slab Quote</h2>
+      <p class="text-gray-300 mb-8">Free estimates on all concrete slab projects in Port Orange.</p>
+      <a href={site.phoneLink} class="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark px-8 py-4 rounded-lg font-bold text-lg transition">
+        {site.phone}
+      </a>
+    </div>
+  </section>
+</BaseLayout>

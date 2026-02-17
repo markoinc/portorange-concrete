@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+
+const service = {
+  name: "Concrete Patios",
+  title: "Concrete Patio Contractors Port Orange FL",
+  description: "Custom concrete patio installation in Port Orange. Stamped, stained & decorative patios. Transform your backyard. Call (386) 220-8770 for free estimate.",
+  hero: "Custom Concrete Patios",
+  intro: "Create the perfect outdoor living space with a beautiful, durable concrete patio. From simple slabs to elaborate stamped designs, we build patios that enhance your home and lifestyle."
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": service.name,
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": site.name,
+    "telephone": site.phone
+  },
+  "areaServed": site.serviceAreas.map(a => ({ "@type": "City", "name": a })),
+  "description": service.description
+};
+
+const faqs = [
+  {
+    q: "How much does a concrete patio cost in Port Orange?",
+    a: "Basic concrete patios run $6-$12 per square foot. A 300 sq ft patio costs $1,800-$3,600. Stamped or decorative concrete costs $12-$25 per square foot. Final price depends on size, design complexity, and site prep needs."
+  },
+  {
+    q: "Is concrete better than pavers for a patio?",
+    a: "Concrete is typically more affordable, requires less maintenance, and won't shift over time like pavers. Stamped concrete can mimic the look of pavers, brick, or stone at a lower cost. Concrete also handles Florida's heat better without becoming too hot to walk on."
+  },
+  {
+    q: "How long does a patio installation take?",
+    a: "Most patio projects take 2-4 days depending on size and complexity. This includes site prep, forming, pouring, and finishing. You can typically use the patio after 7 days of curing."
+  }
+];
+---
+
+<BaseLayout 
+  title={service.title}
+  description={service.description}
+  canonical="/concrete-patio-contractors/"
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-secondary-dark to-secondary py-20 text-white text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">{service.hero}</h1>
+      <p class="text-xl text-gray-300 mb-8">{service.intro}</p>
+      <a href={site.phoneLink} class="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark px-8 py-4 rounded-lg font-bold text-lg transition">
+        Call {site.phone}
+      </a>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-6">Concrete Patio Services in Port Orange</h2>
+      <p class="text-gray-600 mb-6">Your backyard should be an extension of your living space. A custom concrete patio provides the perfect foundation for outdoor entertaining, relaxing, and enjoying Florida's beautiful weather. We design and build patios that complement your home and fit your budget.</p>
+      
+      <h3 class="text-2xl font-semibold mt-10 mb-4">Patio Options We Offer:</h3>
+      <ul class="space-y-3 mb-10">
+        <li class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span><strong>Standard Concrete Patios</strong> – Clean, durable slabs with broom or smooth finish</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span><strong>Stamped Concrete</strong> – Decorative patterns that mimic stone, brick, or tile</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span><strong>Stained Concrete</strong> – Add color to new or existing patios</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span><strong>Exposed Aggregate</strong> – Textured finish that reveals decorative stones</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span><strong>Pool Decks</strong> – Slip-resistant finishes perfect around pools</span>
+        </li>
+      </ul>
+
+      <h3 class="text-2xl font-semibold mt-10 mb-4">Popular Patio Features</h3>
+      <div class="grid md:grid-cols-2 gap-6 mb-10">
+        <div class="bg-gray-50 p-6 rounded-xl">
+          <h4 class="font-semibold mb-2">Built-In Fire Pit Areas</h4>
+          <p class="text-gray-600 text-sm">We can incorporate space for a fire pit into your patio design.</p>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-xl">
+          <h4 class="font-semibold mb-2">Outdoor Kitchen Pads</h4>
+          <p class="text-gray-600 text-sm">Level, reinforced concrete for grills and outdoor kitchens.</p>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-xl">
+          <h4 class="font-semibold mb-2">Covered Patio Slabs</h4>
+          <p class="text-gray-600 text-sm">Foundation work for pergolas, screen enclosures, or covered patios.</p>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-xl">
+          <h4 class="font-semibold mb-2">Multi-Level Patios</h4>
+          <p class="text-gray-600 text-sm">Step-down designs that work with sloped yards.</p>
+        </div>
+      </div>
+
+      <!-- FAQs -->
+      <h3 class="text-2xl font-semibold mt-10 mb-6">Frequently Asked Questions</h3>
+      <div class="space-y-4">
+        {faqs.map(faq => (
+          <div class="border rounded-lg p-5">
+            <h4 class="font-semibold mb-2">{faq.q}</h4>
+            <p class="text-gray-600 text-sm">{faq.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-secondary text-white text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-4">Design Your Dream Patio</h2>
+      <p class="text-gray-300 mb-8">Get a free consultation and estimate for your concrete patio project.</p>
+      <a href={site.phoneLink} class="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark px-8 py-4 rounded-lg font-bold text-lg transition">
+        {site.phone}
+      </a>
+    </div>
+  </section>
+</BaseLayout>
