@@ -1,13 +1,13 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
-import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  integrations: [tailwind(), sitemap()],
+  integrations: [tailwind()],
   output: 'static',
   site: 'https://concreteportorange.com',
   compressHTML: true,
   build: {
+    format: 'directory',
     inlineStylesheets: 'auto'
   }
 });
